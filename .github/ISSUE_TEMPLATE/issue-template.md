@@ -1,6 +1,6 @@
 ---
 name: Issue Template
-about: Standard issue template, use if bug or feature doesn't apply
+about: Standard issue template
 title: "[ISSUE]"
 labels: ''
 assignees: jdetok
