@@ -3,13 +3,13 @@ name: Issue Template
 about: Standard issue template
 title: "[ISSUE]"
 labels: ''
-assignees: jdetok
+assignees: 
 
 ---
 
-## Description (one sentence, what purpose does the work serve):
+## Description of work:
 
-## Acceptance Criteria (true false flags, e.g. does 'x' do 'y'?):
-- 
+## Acceptance Criteria
+- [ ] 
 
-## Notes/Detail (include anything that may be needed to satisfy the issue)
+## Notes/Detail 
