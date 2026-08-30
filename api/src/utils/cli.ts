@@ -35,7 +35,7 @@ export async function confirmDirExists(dir: string, forceYes: boolean = false) {
                 return true;
             }
             return false;
-        } 
+        }
         throw err;
     }
 }

@@ -12,10 +12,7 @@ import { confirmDirExists } from './cli';
     Fetch a parquet file from a url, save the parquet file if saveParq is true (default)
     Fetches the UC OSPO parquet file from their public S3 bucket if no url is passed
 */
-export async function getParquet(
-    url: string = UCOSPO_PARQ_S3_URL,
-    saveParq: boolean = true,
-): Promise<ArrayBuffer> {
+export async function getParquet(url: string = UCOSPO_PARQ_S3_URL, saveParq: boolean = true): Promise<ArrayBuffer> {
     console.log(`Awaiting response from ${url}...`);
     const resp = await fetch(url, {
         method: 'GET',
@@ -44,16 +41,12 @@ export async function getParquet(
     Find the most recent parquet file in the passed directory, return full path as string
     Looks in the parquet data directory by default
 */
-export async function findRecentParquetInDir(
-    dir: string = PARQUET_DATA_DIR,
-): Promise<string> {
+export async function findRecentParquetInDir(dir: string = PARQUET_DATA_DIR): Promise<string> {
     const exists = await confirmDirExists(dir);
     if (!exists) return '';
-    
+
     const entries: Dirent<string>[] = await fs.readdir(dir, { withFileTypes: true });
-    const parqFiles = entries.filter(
-        (f) => f.isFile() && f.name.toLowerCase().endsWith('.parquet'),
-    );
+    const parqFiles = entries.filter((f) => f.isFile() && f.name.toLowerCase().endsWith('.parquet'));
     if (parqFiles.length === 0) return '';
 
     const withStats = await Promise.all(

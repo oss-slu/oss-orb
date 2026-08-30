@@ -1,15 +1,26 @@
-// creates a formatted string of a typescript type from parquet column names 
+// creates a formatted string of a typescript type from parquet column names
 
 import { findRecentParquetInDir, getParquet, parquetColumnNames, readParquetFile } from '../utils/parquet';
 import { snakeToCamel } from '../utils/strings';
 
 const TYPE_NAME = 'parquetData';
 
-// all fields should be typed as string or number, majority string. 
+// all fields should be typed as string or number, majority string.
 // fields in this array will get typed as number, all others string
-const NON_STRING_FIELDS = ['id', 'fork', 'size', 'stargazers_count', 'watchers_count', 'forks_count',
-    'open_issues_count', 'watchers', 'release_downloads', 'contributor_count', 'bus_factor',
-    'subscribers_count', 'affiliation_prediction_gpt_5_mini', 
+const NON_STRING_FIELDS = [
+    'id',
+    'fork',
+    'size',
+    'stargazers_count',
+    'watchers_count',
+    'forks_count',
+    'open_issues_count',
+    'watchers',
+    'release_downloads',
+    'contributor_count',
+    'bus_factor',
+    'subscribers_count',
+    'affiliation_prediction_gpt_5_mini',
 ];
 
 /* 
@@ -19,9 +30,9 @@ const NON_STRING_FIELDS = ['id', 'fork', 'size', 'stargazers_count', 'watchers_c
 */
 async function formatParquetColsAsType(buf: ArrayBuffer): Promise<string> {
     const parqBuf = await parquetColumnNames(buf);
-    return parqBuf.map((col) => (
-        `\t${snakeToCamel(col)}: ${NON_STRING_FIELDS.includes(col) ? 'number' : 'string'};`
-    )).join('\n');
+    return parqBuf
+        .map((col) => `\t${snakeToCamel(col)}: ${NON_STRING_FIELDS.includes(col) ? 'number' : 'string'};`)
+        .join('\n');
 }
 
 // reads local parquet if it exists, otherwise fetches from UC OSPO s3 bucket

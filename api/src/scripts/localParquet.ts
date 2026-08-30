@@ -6,7 +6,7 @@ import { findRecentParquetInDir, getParquet } from '../utils/parquet';
 const existingParq = await findRecentParquetInDir();
 if (existingParq) {
     const proceed = await confirm(
-        `A parquet file already exists locally (${existingParq}) - continue to fetch new file?`
+        `A parquet file already exists locally (${existingParq}) - continue to fetch new file?`,
     );
     if (!proceed) {
         console.log('Aborted');
