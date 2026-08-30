@@ -1,9 +1,7 @@
 function App() {
     return (
         <>
-            <main>
-                OSS Open Source Repository Browser
-            </main>   
+            <main>OSS Open Source Repository Browser</main>
         </>
     );
 }
