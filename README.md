@@ -30,3 +30,6 @@ The frontend can be served by nginx via the *app* container (production behavior
     - Run backend container:<br>`docker compose up api --build -d`
     - Run vite dev server:<br>`cd app && npm ci && npm run dev`<br>
     - ***Frontend should now be accessible in your browser via Vite at http://localhost:6284***
+
+### 4. Optionally, download the UC OSPO Network Parquet file locally:
+- See instructions in [dev scripts file](/docs/dev/setup_scripts.md)
