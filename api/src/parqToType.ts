@@ -4,7 +4,9 @@
 import { findRecentParquetInDir, formatParquetColsAsType, getParquet, readParquetFile } from './utils/parquet';
 
 // reads local parquet if it exists, otherwise fetches from UC OSPO s3 bucket
-const parqBuf = (await readParquetFile(await findRecentParquetInDir()) || await getParquet());
+const parqBuf =
+    (await readParquetFile(await findRecentParquetInDir())) ||
+    (await getParquet());
 
 // print to stdout - ran inside a $() using echo in terminal to write to file
 console.log(await formatParquetColsAsType(parqBuf)); 
