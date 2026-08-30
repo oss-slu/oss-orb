@@ -2,3 +2,5 @@
 node_modules
 output.json
 *.parquet
+dist
+.DS_Store
