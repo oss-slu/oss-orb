@@ -2,7 +2,7 @@ function App() {
     return (
         <>
             <main>
-                Hello, world
+                OSS Open Source Repository Browser
             </main>   
         </>
     );

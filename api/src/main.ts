@@ -1,12 +1,17 @@
-// MOVED ALL BELOW TO parquetScript.ts 
-/*
-import { snakeToCamel } from './utils/strings';
-import { findRecentParquetInDir, getParquet, parquetColumnNames, readParquet } from './utils/parquet';
+import express from 'express';
+import health from './routes/health';
 
-// reads local parquet if it exists, otherwise fetches from UC OSPO s3 bucket
-const parqBuf = (await readParquet(await findRecentParquetInDir()) || await getParquet());
+const PORT = 8765;
+const ROUTES = [health];
 
-const columns = (await parquetColumnNames(parqBuf)).map(col => snakeToCamel(col));
+function main() {
+    const app = express();
+    app.use(express.json());
 
-console.log(columns);
-*/
+    ROUTES.forEach((r) => app.use(r));
+
+    app.listen(PORT, () => console.log(`API listening on port ${PORT}`));
+}
+
+// BACKEND ENTRYPOINT
+main();
