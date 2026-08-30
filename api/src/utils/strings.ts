@@ -14,3 +14,7 @@ export function snakeToCamel(str: string): string {
     }
     return newStr;
 }
+
+export function toCamel(s: string): string {
+    return s.replace(/_([a-z0-9])/g, (_, c) => c.toUpperCase());
+}

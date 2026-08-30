@@ -9,8 +9,10 @@
         "fmt": "prettier --write **/*.{ts,js,json}"
     },
     "dependencies": {
+        "apache-arrow": "^21.2.0",
         "express": "^5.2.1",
-        "hyparquet": "^1.29.2"
+        "hyparquet": "^1.29.2",
+        "parquet-wasm": "^0.7.2"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
