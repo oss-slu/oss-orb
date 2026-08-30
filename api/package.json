@@ -1,0 +1,19 @@
+{
+    "name": "oss-orb-backend",
+    "type": "module",
+    "dependencies": {
+        "cors": "^2.8.6",
+        "D": "^1.0.0",
+        "dotenv": "^17.4.2",
+        "express": "^5.2.1",
+        "hyparquet": "^1.28.2",
+        "prettier": "^3.9.6"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.19",
+        "@types/express": "^5.0.6",
+        "@types/node": "^26.4.0",
+        "tsx": "^4.23.12",
+        "typescript": "^7.0.2"
+    }
+}
