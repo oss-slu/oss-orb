@@ -1,4 +1,4 @@
-// MOVED ALL BELOW TO parquetScript.ts 
+// MOVED ALL BELOW TO parquetScript.ts
 /*
 import { snakeToCamel } from './utils/strings';
 import { findRecentParquetInDir, getParquet, parquetColumnNames, readParquet } from './utils/parquet';

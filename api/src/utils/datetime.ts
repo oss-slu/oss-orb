@@ -5,7 +5,12 @@
 export const MMDDYY_HHMMSS = (date: Date) => {
     const pad = (n: number, len = 2) => String(n).padStart(len, '0');
     return [
-        pad(date.getMonth() + 1), pad(date.getDate()), date.getFullYear().toString().slice(-2), '_',
-        pad(date.getHours()), pad(date.getMinutes()), pad(date.getSeconds()),
+        pad(date.getMonth() + 1),
+        pad(date.getDate()),
+        date.getFullYear().toString().slice(-2),
+        '_',
+        pad(date.getHours()),
+        pad(date.getMinutes()),
+        pad(date.getSeconds()),
     ].join('');
-}
+};
