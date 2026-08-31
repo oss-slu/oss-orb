@@ -6,6 +6,8 @@ services:
         restart: unless-stopped
         ports: 
             - 8765:8765
+        volumes:
+            - ./api/data:/api/data:ro
         
     app:
         build:

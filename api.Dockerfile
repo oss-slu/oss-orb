@@ -7,6 +7,7 @@ RUN npm ci
 
 COPY api/tsconfig.json ./
 COPY api/src ./src
+COPY api/data ./data
 
 RUN npm run build
 
@@ -24,4 +25,6 @@ COPY --from=builder /api/dist ./dist
 CMD ["node", "dist/main.js"]
 
 EXPOSE 8765
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "curl", "-f", "http://localhost:8765/health" ]
+
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD [ "curl", "-f", "http://localhost:8765/health" ]

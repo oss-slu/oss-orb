@@ -16,8 +16,10 @@
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
+        "@types/cors": "^2.8.19",
         "@types/express": "^5.0.6",
         "@types/node": "^24.13.3",
+        "cors": "^2.8.6",
         "eslint": "^10.8.0",
         "globals": "^17.7.0",
         "jiti": "^2.7.0",

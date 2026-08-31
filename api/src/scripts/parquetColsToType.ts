@@ -23,6 +23,9 @@ const NON_STRING_FIELDS = [
     'affiliation_prediction_gpt_5_mini',
 ];
 
+// string fields get | null added by default, fields without null option must go here
+const NON_NULL_FIELDS = ['university', 'fullName', 'owner'];
+
 /* 
     Return a formatted string from an array of column name strings
     Each column name is converted from snake_case to camelCase
@@ -31,8 +34,10 @@ const NON_STRING_FIELDS = [
 async function formatParquetColsAsType(buf: ArrayBuffer): Promise<string> {
     const parqBuf = await parquetColumnNames(buf);
     return parqBuf
-        .map((col) => `\t${snakeToCamel(col)}: ${NON_STRING_FIELDS.includes(col) ? 'number' : 'string'};`)
-        .join('\n');
+        .map((col) => `\t${snakeToCamel(col)}: ${NON_STRING_FIELDS.includes(col)
+            ? 'number'
+            : `string${NON_NULL_FIELDS.includes(col) ? '' : ' | null'}`};`
+        ).join('\n');
 }
 
 // reads local parquet if it exists, otherwise fetches from UC OSPO s3 bucket
