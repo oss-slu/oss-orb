@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:8765';
+export const API_URL = '/api';
 
 export const PIE_COLORS = [
     '#6366f1',
