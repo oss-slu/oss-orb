@@ -9,7 +9,7 @@ const data = sampleData as parquetData[];
 
 router.get('/licndist', (_req, res) => {
     const distData = getDistribution(data, (row) => row.license!);
-    res.json(Object.entries(distData).map(([name, value]) => ({name, value})));
+    res.json(Object.entries(distData).map(([name, value]) => ({ name, value })));
 });
 
 export default router;

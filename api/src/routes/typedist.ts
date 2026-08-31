@@ -9,7 +9,7 @@ const data = sampleData as parquetData[];
 
 router.get('/typedist', (_req, res) => {
     const distData = getDistribution(data, (row) => row.typePredictionGpt5Mini!);
-    res.json(Object.entries(distData).map(([name, value]) => ({name, value})));
+    res.json(Object.entries(distData).map(([name, value]) => ({ name, value })));
 });
 
 export default router;

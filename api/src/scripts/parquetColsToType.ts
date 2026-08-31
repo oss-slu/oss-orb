@@ -34,10 +34,15 @@ const NON_NULL_FIELDS = ['university', 'fullName', 'owner'];
 async function formatParquetColsAsType(buf: ArrayBuffer): Promise<string> {
     const parqBuf = await parquetColumnNames(buf);
     return parqBuf
-        .map((col) => `\t${snakeToCamel(col)}: ${NON_STRING_FIELDS.includes(col)
-            ? 'number'
-            : `string${NON_NULL_FIELDS.includes(col) ? '' : ' | null'}`};`
-        ).join('\n');
+        .map(
+            (col) =>
+                `\t${snakeToCamel(col)}: ${
+                    NON_STRING_FIELDS.includes(col)
+                        ? 'number'
+                        : `string${NON_NULL_FIELDS.includes(col) ? '' : ' | null'}`
+                };`,
+        )
+        .join('\n');
 }
 
 // reads local parquet if it exists, otherwise fetches from UC OSPO s3 bucket

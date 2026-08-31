@@ -1,4 +1,4 @@
-import type { parquetData } from "../types/parquetData";
+import type { parquetData } from '../types/parquetData';
 
 /* 
     Calculate distribution of the values in the field passed to keyFn (mostly used for pie charts)
