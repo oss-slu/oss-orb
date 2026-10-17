@@ -24,7 +24,7 @@
         "globals": "^17.7.0",
         "jiti": "^2.7.0",
         "prettier": "^3.9.6",
-        "tsup": "^8.5.1",
+        "tsup": "^9.0.0",
         "typescript": "~6.0.2",
         "typescript-eslint": "^8.65.0"
     }
