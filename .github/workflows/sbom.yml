@@ -1,0 +1,109 @@
+
+name: Generate and Attest SBOMs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate-sboms:
+    name: Generate API and App SBOMs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install API dependencies
+        working-directory: api
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --ignore-scripts --no-audit --no-fund
+          else
+            npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+          fi
+
+      - name: Install App dependencies
+        working-directory: app
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --ignore-scripts --no-audit --no-fund
+          else
+            npm install --ignore-scripts --no-audit --no-fund --package-lock=false
+          fi
+
+      - name: Generate API SBOM
+        uses: anchore/sbom-action@f325610c9f50a54015d37c8d16cb3b0e2c8f4de0 # v0.18.0
+        with:
+          path: ./api
+          format: spdx-json
+          output-file: oss-orb-api-sbom.spdx.json
+          upload-artifact: false
+
+      - name: Generate App SBOM
+        uses: anchore/sbom-action@f325610c9f50a54015d37c8d16cb3b0e2c8f4de0 # v0.18.0
+        with:
+          path: ./app
+          format: spdx-json
+          output-file: oss-orb-app-sbom.spdx.json
+          upload-artifact: false
+
+      - name: Upload API SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: oss-orb-api-sbom
+          path: oss-orb-api-sbom.spdx.json
+          if-no-files-found: error
+
+      - name: Upload App SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: oss-orb-app-sbom
+          path: oss-orb-app-sbom.spdx.json
+          if-no-files-found: error
+
+  attest-sboms:
+    name: Attest SBOM Provenance
+    needs: generate-sboms
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+
+    steps:
+      - name: Download API SBOM
+        uses: actions/download-artifact@v4
+        with:
+          name: oss-orb-api-sbom
+
+      - name: Download App SBOM
+        uses: actions/download-artifact@v4
+        with:
+          name: oss-orb-app-sbom
+
+      - name: Attest API SBOM Provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: oss-orb-api-sbom.spdx.json
+
+      - name: Attest App SBOM Provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: oss-orb-app-sbom.spdx.json
+
